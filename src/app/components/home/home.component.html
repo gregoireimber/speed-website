@@ -1,0 +1,17 @@
+<app-header></app-header>
+
+<div class="home-container">
+  <app-speed [speed]="currentSpeed" [unit]="chosenUnit"></app-speed>
+
+  <div class="unit-buttons">
+    <button class="speed-button secondary" (click)="changeUnit('m/s')">
+      m/s (Meter per Second)
+    </button>
+    <button class="speed-button secondary" (click)="changeUnit('mph')">
+      mph (Miles per Hour)
+    </button>
+    <button class="speed-button secondary" (click)="changeUnit('kph')">
+      kph (Kilometers per Hour)
+    </button>
+  </div>
+</div>

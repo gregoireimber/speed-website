@@ -1,1 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+  font-family: "Inter", serif;
+  color: white;
+  background-color: #001f2d;
+}
+
+.speed-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 2rem;
+  border: 0;
+  border-radius: 5px;
+  color: #001f2d;
+  cursor: pointer;
+
+  &.primary {
+    background-color: white;
+  }
+
+  &.secondary {
+    background-color: #001f2d;
+    border: 1px solid white;
+    color: white;
+  }
+}

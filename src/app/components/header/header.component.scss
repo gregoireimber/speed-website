@@ -1,0 +1,18 @@
+.logo-container {
+  margin-top: 2rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+
+  p {
+    margin: 0;
+    font-weight: 700;
+    font-size: 3rem;
+  }
+
+  .logo-icon {
+    width: 3rem;
+    object-fit: cover;
+  }
+}

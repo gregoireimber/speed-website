@@ -1,0 +1,19 @@
+.speedo-container {
+  margin-top: 4rem;
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  align-items: center;
+
+  .numbers-container {
+    font-size: 10rem;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  .units-container {
+    font-size: 2rem;
+  }
+}
