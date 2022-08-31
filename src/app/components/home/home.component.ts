@@ -10,19 +10,24 @@ export class HomeComponent implements OnInit {
   public chosenUnit: Units = 'mph';
 
   ngOnInit(): void {
-    this.getCurrentSpeed();
+    navigator.geolocation.watchPosition(
+      this.getCurrentSpeed,
+      this.errorCallback
+    );
   }
 
-  public getCurrentSpeed(): void {
+  public getCurrentSpeed(position: GeolocationPosition): void {
     if (navigator.geolocation) {
-      navigator.geolocation.watchPosition((position: GeolocationPosition) => {
-        const speed = position.coords.speed ?? 0;
-        this.convertToChosenUnit(speed);
-      });
+      const speed = position.coords.speed ?? 0;
+      this.convertToChosenUnit(speed);
     } else {
       // Create a better error here
       console.log('no support for geolocation');
     }
+  }
+
+  private errorCallback(error: any): void {
+    console.log('there has been an error', error);
   }
 
   public changeUnit(newUnit: Units): void {
