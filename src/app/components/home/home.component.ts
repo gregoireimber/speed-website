@@ -8,45 +8,47 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
   public currentSpeed: number = 0;
   public chosenUnit: Units = 'mph';
+  public rawSpeed: number = 0;
+  public extraAccuracy = false;
 
   ngOnInit(): void {
     navigator.geolocation.watchPosition(
-      this.getCurrentSpeed,
-      this.errorCallback
+      (position: GeolocationPosition) => {
+        this.rawSpeed = position.coords.speed ?? 0;
+        this.convertToChosenUnit(this.rawSpeed);
+      },
+      () => {
+        alert(
+          'There has been an error getting position, please check your location services :('
+        );
+      },
+      { enableHighAccuracy: true }
     );
-  }
-
-  public getCurrentSpeed(position: GeolocationPosition): void {
-    if (navigator.geolocation) {
-      const speed = position.coords.speed ?? 0;
-      this.convertToChosenUnit(speed);
-    } else {
-      // Create a better error here
-      console.log('no support for geolocation');
-    }
-  }
-
-  private errorCallback(error: any): void {
-    console.log('there has been an error', error);
   }
 
   public changeUnit(newUnit: Units): void {
     this.chosenUnit = newUnit;
-    this.convertToChosenUnit(this.currentSpeed);
+    this.convertToChosenUnit(this.rawSpeed);
   }
 
-  private convertToChosenUnit(speed: number) {
+  private convertToChosenUnit(speed: number): void {
     switch (this.chosenUnit) {
       case 'm/s': {
-        this.currentSpeed = speed;
+        this.currentSpeed = this.extraAccuracy
+          ? +speed.toFixed(2)
+          : Math.round(speed);
         break;
       }
       case 'mph': {
-        this.currentSpeed = Math.round(speed * 2.23694);
+        this.currentSpeed = this.extraAccuracy
+          ? +(speed * 2.23694).toFixed(2)
+          : Math.round(speed * 2.23694);
         break;
       }
       case 'kph': {
-        this.currentSpeed = Math.round(speed * 3.6000059687997);
+        this.currentSpeed = this.extraAccuracy
+          ? +(speed * 3.6000059687997).toFixed(2)
+          : Math.round(speed * 3.6000059687997);
         break;
       }
     }

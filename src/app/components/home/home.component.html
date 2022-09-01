@@ -13,5 +13,13 @@
     <button class="speed-button secondary" (click)="changeUnit('kph')">
       kph (Kilometers per Hour)
     </button>
+
+    <div class="divider-line"></div>
+    <button
+      class="speed-button secondary"
+      (click)="extraAccuracy = !extraAccuracy"
+    >
+      {{ extraAccuracy ? "Disable extra accuracy" : "Enable extra accuracy" }}
+    </button>
   </div>
 </div>
